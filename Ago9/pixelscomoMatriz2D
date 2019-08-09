@@ -1,0 +1,54 @@
+void setup(){
+  size(400,400);
+  background(0);
+  loadPixels();
+  
+   //for(int i = 0 ; i<400; i++){
+   //  rect2(int(random(400)), int(random(400)), int(random(100)), int(random(100)), int(random(100)), int(random(100)), int(random(100)));
+   //}
+   
+   for(int i = 0 ; i<500; i++){
+     elipse2(int(random(400)), int(random(400)),  int(random(2,130)), int(random(100)), int(random(100)), int(random(100)));
+   }
+  updatePixels();
+}
+
+//esta funcion me permite pasar una coordenada XY y recibir el índice correspondiente en pixels[]
+int calculaXY(int x, int y){
+  int resultado = y*width + x;
+  return resultado;
+}
+
+//un rectángulo que agrega el color parámetro a los colore almacenados en pixels[]
+void rect2(int x, int y, int w, int h, int r, int g, int b){
+  for (int i = x; i< x+w && i< width; i++){
+    for(int j = y; j< y+h && j<height; j++){
+      int colorActual = pixels[calculaXY(i,j)];
+      float rojo = red(colorActual);
+      float verde = green(colorActual);
+      float azul = blue(colorActual);
+      pixels[calculaXY(i,j)] = color(rojo + r, verde + g, azul + b);
+    }
+  }
+}
+
+//un circulo que agrega el color parámetro a los colores almacenados en pixels[] en forma radial
+void elipse2(int x, int y, int diam, int r, int g, int b){
+  float centrox = x+diam/2;
+  float centroy = y +diam/2;
+  float max = diam/2;
+  for (int i = x; i< x+diam && i< width; i++){
+    for(int j = y; j< y+diam && j<height; j++){
+      int colorActual = pixels[calculaXY(i,j)];
+      float rojo = red(colorActual);
+      float verde = green(colorActual);
+      float azul = blue(colorActual);
+      float distancia = dist(i,j,centrox,centroy);
+      float saturacion = 0;
+      if (distancia<max){
+        saturacion = map(distancia,0,max,1,0);
+      }
+      pixels[calculaXY(i,j)] = color(rojo + r*saturacion, verde + g*saturacion, azul + b*saturacion);
+    }
+  }
+}
