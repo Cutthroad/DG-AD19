@@ -1,4 +1,4 @@
-# Calificaciones al 19 de Noviembre de 2019
+# Calificaciones Finales
 
 | NUA    | P1  | P2 | P3 | P4 | P5 | FINAL |
 |--------|-----|----|----|----|----|-------|
